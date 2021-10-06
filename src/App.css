@@ -8,4 +8,11 @@
   'n c';
   /*grid-gap: 10px;*/
   width: 1200px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.app-wrapper-container {
+  grid-area: c;
+  background-color: #BBDED6;
 }
