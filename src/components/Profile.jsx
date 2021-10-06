@@ -1,10 +1,11 @@
 import React from 'react';
+import p from './Profile.module.css';
 
 const Profile = () => {
   return (
-    <main className='content'>
+    <main className={p.content}>
       <div>
-        <img className='content-img' src='https://phonoteka.org/uploads/posts/2021-06/1624911007_8-phonoteka_org-p-obezyana-oboi-krasivo-8.jpg'></img>
+        <img className={p.contentImg} src='https://phonoteka.org/uploads/posts/2021-06/1624911007_8-phonoteka_org-p-obezyana-oboi-krasivo-8.jpg'></img>
       </div>
       <div>
         ava + dsecription
