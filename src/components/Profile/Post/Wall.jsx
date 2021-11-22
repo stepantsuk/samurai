@@ -11,6 +11,9 @@ const Wall = (props) => {
       <div className={wall.postText}>
         {props.message}
       </div>
+      <div className={wall.likesCount}>
+        likes:{props.likesCount}
+      </div>
     </div>
   )
 }

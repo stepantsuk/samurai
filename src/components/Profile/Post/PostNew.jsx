@@ -1,16 +1,32 @@
 import React from 'react';
 import postNew from './PostNew.module.css';
 
+const PostNew = (props) => {
 
-const PostNew = () => {
+  let newPostElement = React.createRef();
+  
+
+  let onAddBtn = () => {
+    props.addPost();
+    props.handleTextPost('');
+  };
+
+  let textPost = () => {
+    props.handleTextPost(newPostElement.current.value);
+  }
+  
   return (
-      <div className={postNew.container}>
-        <textarea placeholder="Write smth" className={postNew.text}>
+    <div className={postNew.container}>
+      <div>
+        <textarea value={props.newPostText} onChange={textPost} ref={newPostElement} placeholder="Write smth" className={postNew.text}>
         </textarea>
-        <button className={postNew.btn}>
+      </div>
+      <div>
+        <button onClick={onAddBtn} className={postNew.btn}>
           Send
         </button>
       </div>
+    </div>
   )
 }
 

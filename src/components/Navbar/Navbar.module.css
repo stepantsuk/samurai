@@ -1,4 +1,39 @@
 .nav {
   grid-area: n;
   background-color: #FAE3D9;
+  padding: 20px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.activeLink {
+  color: black;
+}
+
+.linkFriends {
+  font-size: 1.5em;
+}
+
+.linkFriendsWrapper {
+  margin-top: 30px;
+}
+
+.friendsWrapper {
+  display: flex;
+}
+
+.itemFriendsWrapper {
+  padding-right: 5px;
+  text-align: center;
+}
+
+.avatarFriends {
+  border-radius: 50%;
+  border: solid white 1px;
+  margin-right: 3%;
+  height: 50px;
+  width: 50px;
 }

@@ -1,5 +1,7 @@
 .postContainer {
   display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
 }
 
 .postAvatar {
@@ -14,4 +16,8 @@
 
 .postText {
   width: 95%;
+}
+
+.likesCount{
+  
 }
