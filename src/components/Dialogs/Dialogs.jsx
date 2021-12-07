@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
+import { createActionHandleTextMsg, createActionAddMsg } from './../../redux/dialogsPageReducer'
 
 
 const Dialogs = (props) => {
@@ -53,9 +54,15 @@ const Dialogs = (props) => {
 
   let newMsgRef = React.createRef();
 
-  let showMsgText = () => {
-    alert (newMsgRef.current.value)
-  }
+  //let showMsgText = newMsgRef.current.value;
+
+  let inputMsgText = () => {
+    props.dispatch(createActionHandleTextMsg(newMsgRef.current.value))
+  };
+
+  let publishMsgText = () => {
+    props.dispatch(createActionAddMsg())
+  };
 
 
   //тренировка по React.createRef() FINISH
@@ -69,11 +76,11 @@ const Dialogs = (props) => {
         {messagesElements}
         <div className={css.msgContainer}>
           <div>
-            <textarea ref={newMsgRef} placeholder="Write msg" className={css.msgText}>
+            <textarea value={props.dialogsData.newMessageText} ref={newMsgRef} onChange={inputMsgText} placeholder="Write msg" className={css.msgText}>
             </textarea>
           </div>
           <div>
-            <button onClick={showMsgText} className={css.msgSendBtn}>
+            <button onClick={publishMsgText} className={css.msgSendBtn}>
               SendMsg
             </button>
           </div>

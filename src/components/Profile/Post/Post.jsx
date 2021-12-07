@@ -24,7 +24,7 @@ const Post = (props) => {
       <h3 className={post.title}>
         MyPosts
       </h3>
-      <PostNew addPost={props.addPost} handleTextPost={props.handleTextPost} newPostText={props.newPostText}/>
+      <PostNew dispatch={props.dispatch} dispatch={props.dispatch} newPostText={props.newPostText}/>
       {wallElement}
     </div>
   )

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { state, renew, addPost, handleTextPost } from './redux/State';
+import { store } from './redux/State';
 
 /*
 let companionData = [
@@ -25,17 +25,17 @@ let wallData = [
 */
 
 
-let rerenderEntireTree = (state) => {
+let rerenderEntireTree = () => {
   ReactDOM.render(
     <React.StrictMode>
-      <App state={state} addPost={addPost} handleTextPost={handleTextPost}/>
+      <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
     </React.StrictMode>,
     document.getElementById('root')
   );
 };
 
-rerenderEntireTree(state);
-renew (rerenderEntireTree);
+rerenderEntireTree();
+store.subscribe(rerenderEntireTree);
 
 
 

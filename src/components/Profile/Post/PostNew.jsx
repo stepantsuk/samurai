@@ -1,20 +1,22 @@
 import React from 'react';
 import postNew from './PostNew.module.css';
+import { createActionAddPost, createActionHandleTextPost } from './../../../redux/profilePageReducer'
 
 const PostNew = (props) => {
 
   let newPostElement = React.createRef();
-  
 
   let onAddBtn = () => {
-    props.addPost();
-    props.handleTextPost('');
+    props.dispatch(createActionAddPost());
+    //props.handleTextPost('');
   };
 
   let textPost = () => {
-    props.handleTextPost(newPostElement.current.value);
+    props.dispatch(createActionHandleTextPost(newPostElement.current.value));
   }
-  
+
+  //props.handleTextPost(newPostElement.current.value);
+
   return (
     <div className={postNew.container}>
       <div>
