@@ -1,7 +1,5 @@
 import { dialogsPageReducer } from "./dialogsPageReducer";
-
 import { profilePageReducer } from "./profilePageReducer";
-
 import { sideBarFriendsReducer } from "./sideBarFriendsReducer";
 
 /*

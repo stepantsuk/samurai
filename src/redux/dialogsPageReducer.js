@@ -1,20 +1,34 @@
-export const dialogsPageReducer = (state, action) => {
+let initialState = {
+  companionData: [
+    { id: 1, name: 'Petr' },
+    { id: 2, name: 'Vasia' },
+    { id: 3, name: 'Ivan' },
+  ],
+  messageData: [
+    { id: 1, message: 'Hello' },
+    { id: 2, message: 'It is me' },
+    { id: 3, message: 'Fine' },
+  ],
+  newMessageText: '',
+};
+
+export const dialogsPageReducer = (state = initialState, action) => {
   let _addMessage = () => {
-    let messageBody = { id: 4, message: state.newMessageText } ;
-    state.messageData.push(messageBody) ;
+    let messageBody = { id: 4, message: state.newMessageText };
+    state.messageData.push(messageBody);
     state.newMessageText = '';
   };
 
-  let _handleTextMessage = (messageValue) =>  {
-    state.newMessageText= messageValue;
+  let _handleTextMessage = (messageValue) => {
+    state.newMessageText = messageValue;
   };
-  
+
   switch (action.type) {
     case 'ADD-MESSAGE':
       _addMessage();
       return state;
     case 'HANDLE-TEXT-MESSAGE':
-      _handleTextMessage(action.messageText); 
+      _handleTextMessage(action.messageText);
       return state;
     default: return state;
   };
@@ -34,7 +48,7 @@ export const createActionAddMsg = () => {
   }
 };
 
-export const createActionHandleTextMsg  = (text) => {
+export const createActionHandleTextMsg = (text) => {
   return {
     type: 'HANDLE-TEXT-MESSAGE',
     messageText: text,
