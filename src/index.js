@@ -23,7 +23,7 @@ let wallData = [
   { id: 3, message: 'All is good', likesCount: 5 },
 ]
 */
-//учусь пользваоться гитом
+//учусь пользваоться гитомsdfdsfsdfdsdsfdsf
 
 let rerenderEntireTree = () => {
   ReactDOM.render(
