@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/User/Profile';
+import {ProfileContainer} from './components/Profile/User/ProfileContainer';
 import Dialogs from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
 import News from './components/News/News';
@@ -17,7 +17,7 @@ const App = (props) => {
         <Header />
         <Navbar friendsData={props.state.sideBarFriends}/>
         <div className='app-wrapper-container'>
-          <Route path='/profile' render={ () => <Profile postsData={props.state.profilePage} dispatch={props.dispatch} />} />
+          <Route path='/profile' render={ () => <ProfileContainer profilePage={props.state.profilePage} dispatch={props.dispatch} />} />
           <Route path='/dialogs' render={ () => <Dialogs dialogsData={props.state.dialogsPage} dispatch={props.dispatch} /> } />
           <Route path='/news' render={ () => <News />} />
           <Route path='/music' render={ () => <Music />} />
