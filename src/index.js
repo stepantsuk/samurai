@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/redux-store'
+import { Provider } from 'react-redux';
 
 /*
 let companionData = [
@@ -28,7 +29,9 @@ let wallData = [
 let rerenderEntireTree = () => {
   ReactDOM.render(
     <React.StrictMode>
-      <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
+      <Provider>
+        <App store={store} />
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
   );

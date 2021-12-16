@@ -17,8 +17,7 @@ const App = (props) => {
         <Header />
         <Navbar friendsData={props.state.sideBarFriends}/>
         <div className='app-wrapper-container'>
-          <Route path='/profile' render={ () => <ProfileContainer profilePage={props.state.profilePage} dispatch={props.dispatch} />} />
-          <Route path='/dialogs' render={ () => <Dialogs dialogsData={props.state.dialogsPage} dispatch={props.dispatch} /> } />
+          <Route path='/profile' render={ () => <ProfileContainer />} />
           <Route path='/news' render={ () => <News />} />
           <Route path='/music' render={ () => <Music />} />
           <Route path='/settings' render={ () => <Settings />} />
@@ -30,3 +29,6 @@ const App = (props) => {
 };
 
 export default App;
+
+
+// <Route path='/dialogs' render={ () => <Dialogs dialogsData={props.state.dialogsPage} dispatch={props.dispatch} /> } />
