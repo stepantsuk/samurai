@@ -15,7 +15,7 @@ const Navbar = (props) => {
     )
   }
 
-  let friendsElements = props.friendsData.friendsData.map(friend => <FriendsSideBarItem name={friend.name} />)
+  // let friendsElements = props.friendsData.friendsData.map(friend => <FriendsSideBarItem name={friend.name} />)
 
   return (
     <nav className={css.nav}>
@@ -55,7 +55,7 @@ const Navbar = (props) => {
           Friends
         </NavLink>
         <div className={css.friendsWrapper}>
-          {friendsElements}
+          {/* {friendsElements} */}
         </div>
       </div>
     </nav>

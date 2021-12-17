@@ -15,7 +15,7 @@ const App = (props) => {
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
-        <Navbar friendsData={props.state.sideBarFriends}/>
+        <Navbar /*friendsData={props.state.sideBarFriends}*//>
         <div className='app-wrapper-container'>
           <Route path='/profile' render={ () => <ProfileContainer />} />
           <Route path='/news' render={ () => <News />} />
