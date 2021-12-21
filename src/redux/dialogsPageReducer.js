@@ -13,23 +13,32 @@ let initialState = {
 };
 
 export const dialogsPageReducer = (state = initialState, action) => {
+
+  let stateCopy;
+
   let _addMessage = () => {
     let messageBody = { id: 4, message: state.newMessageText };
-    state.messageData.push(messageBody);
-    state.newMessageText = '';
+    stateCopy = {
+      ...state,
+      messageData: [...state.messageData, messageBody],
+      newMessageText: '',
+    };
   };
 
   let _handleTextMessage = (messageValue) => {
-    state.newMessageText = messageValue;
+    stateCopy = {
+      ...state,
+      newMessageText: messageValue,
+    };
   };
 
   switch (action.type) {
     case 'ADD-MESSAGE':
       _addMessage();
-      return state;
+      return stateCopy;
     case 'HANDLE-TEXT-MESSAGE':
       _handleTextMessage(action.messageText);
-      return state;
+      return stateCopy;
     default: return state;
   };
 

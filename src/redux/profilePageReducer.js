@@ -8,23 +8,27 @@ let initialState = {
 };
 
 export const profilePageReducer = (state = initialState, action) => {
+  
+  let stateCopy = {...state};
+  
   let _addPost = () => {
     let newPost = { id: 4, message: state.newPostText, likesCount: 99 };
-    state.wallData.push(newPost);
-    state.newPostText = '';
+    stateCopy.wallData = [...state.wallData];
+    stateCopy.wallData.push(newPost);
+    stateCopy.newPostText = '';
   };
 
   let _handleTextPost = (postText) => {
-    state.newPostText = postText;
+    stateCopy.newPostText = postText;
   };
 
   switch (action.type) {
     case 'ADD-POST':
       _addPost();
-      return state;
+      return stateCopy;
     case 'HANDLE-TEXT-POST':
       _handleTextPost(action.postText);
-      return state;
+      return stateCopy;
     default:
       return state;
   };

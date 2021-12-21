@@ -57,11 +57,11 @@ const Dialogs = (props) => {
   //let showMsgText = newMsgRef.current.value;
 
   let inputMsgText = () => {
-    props.dispatch(createActionHandleTextMsg(newMsgRef.current.value))
+    props.inputMsgText(newMsgRef.current.value)
   };
 
   let publishMsgText = () => {
-    props.dispatch(createActionAddMsg())
+    props.publishMsgText()
   };
 
 
