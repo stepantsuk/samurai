@@ -5,13 +5,15 @@ import ava from './../../img/ava.jpg';
 
 
 export let Users = (props) => {
-
-  if (props.usersState.users.length === 0) {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-    props.setUsers(response.data.items);
-    });
+  let setUsers = () => {
+    if (props.usersState.users.length === 0) {
+      axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+      props.setUsers(response.data.items);
+      });
+    };
   };
   return <div>
+    <button onClick={setUsers}>setUsers</button>
     {props.usersState.users.map(u => {
       return (
         <div key={u.id}>
