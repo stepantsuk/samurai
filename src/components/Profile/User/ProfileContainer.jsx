@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
-import { createActionAddPost, createActionHandleTextPost } from './../../../redux/profilePageReducer'
+import { createActionAddPost, createActionHandleTextPost, setUsersProfile } from './../../../redux/profilePageReducer'
 import { connect } from 'react-redux';
 // import { wallData } from './../Post/wallData'
 
@@ -32,12 +32,29 @@ import { connect } from 'react-redux';
 // };
 
 
+class ProfileContainer extends React.Component {
+  componentDidMount() {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
+      this.props.setUsersProfile(response.data);
+    });
+  };
+
+  render() {
+    return (
+      <Profile {...this.props} />
+    )
+  };
+
+
+}
+
 const mapStateToProps = (state) => {
   return {
     profileState: state.profilePage,
   }
 };
 
+/*
 const mapDispatchToProps = (dispatch) => {
   return {
     addBtn: () => {
@@ -48,6 +65,7 @@ const mapDispatchToProps = (dispatch) => {
     },
   }
 };
+*/
 
-export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, })(ProfileContainer);
 

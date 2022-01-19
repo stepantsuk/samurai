@@ -1,3 +1,7 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
 let initialState = {
   wallData: [
     { id: 1, message: 'Hi how are you ?', likesCount: 12 },
@@ -5,30 +9,32 @@ let initialState = {
     { id: 3, message: 'All is good', likesCount: 5 },
   ],
   newPostText: '',
+  profile: null,
 };
 
 export const profilePageReducer = (state = initialState, action) => {
   
-  let stateCopy = {...state};
-  
-  let _addPost = () => {
-    let newPost = { id: 4, message: state.newPostText, likesCount: 99 };
-    stateCopy.wallData = [...state.wallData];
-    stateCopy.wallData.push(newPost);
-    stateCopy.newPostText = '';
-  };
-
-  let _handleTextPost = (postText) => {
-    stateCopy.newPostText = postText;
-  };
-
   switch (action.type) {
-    case 'ADD-POST':
-      _addPost();
-      return stateCopy;
-    case 'HANDLE-TEXT-POST':
-      _handleTextPost(action.postText);
-      return stateCopy;
+    case ADD_POST:{ 
+      let newPost = { id: 4, message: state.newPostText, likesCount: 99 }
+      return {
+        ...state,
+        wallData: [...state.wallData, newPost],
+        newPostText: '',
+      } 
+    }
+    case UPDATE_NEW_POST_TEXT:{
+      return {
+        ...state,
+        newPostText: action.newText,
+      } 
+    }
+    case SET_USER_PROFILE: {
+      return {
+        ...state,
+        profile: action.profile,
+      }
+    }
     default:
       return state;
   };
@@ -36,16 +42,18 @@ export const profilePageReducer = (state = initialState, action) => {
 
 export const createActionAddPost = () => {
   return {
-    type: 'ADD-POST'
+    type: ADD_POST
   }
 };
 
 export const createActionHandleTextPost = (text) => {
   return {
-    type: 'HANDLE-TEXT-POST',
-    postText: text,
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text,
   }
 };
+
+export const setUsersProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 
 /* if (action.type === 'ADD-POST') {
