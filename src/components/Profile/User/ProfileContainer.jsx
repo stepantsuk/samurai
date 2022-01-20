@@ -1,12 +1,13 @@
 import React from 'react';
 import Profile from './Profile';
-import { createActionAddPost, createActionHandleTextPost } from './../../../redux/profilePageReducer'
+import { createActionAddPost, createActionHandleTextPost, setUserProfile } from './../../../redux/profilePageReducer'
 import { connect } from 'react-redux';
+import * as axios from "axios";
 // import { wallData } from './../Post/wallData'
 
 
 // export const ProfileContainer = (props) => {
-  
+
 //   let addBtn = () => {
 //     props.dispatch(createActionAddPost());
 //     //props.handleTextPost('');
@@ -21,7 +22,7 @@ import { connect } from 'react-redux';
 //   return (
 //     <Profile addBtn={addBtn} textPost={textPost} profileState={profileState}/>
 //   )
-  
+
 //   //return (
 //   //  <main className={css.wrapper}>
 //   //    <ProfilePict />
@@ -31,6 +32,19 @@ import { connect } from 'react-redux';
 //   //)
 // };
 
+class ProfileContainer extends React.Component {
+  componentDidMount() {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
+      this.props.setUserProfile(response.data);
+    })
+  };
+
+  render() {
+    return (
+      <Profile {...this.props} />
+    )
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -38,16 +52,19 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addBtn: () => {
-      dispatch(createActionAddPost());
-    },
-    textPost: (text) => {
-      dispatch(createActionHandleTextPost(text));
-    },
-  }
-};
+export default connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, setUserProfile })(ProfileContainer);
 
-export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addBtn: () => {
+//       dispatch(createActionAddPost());
+//     },
+//     textPost: (text) => {
+//       dispatch(createActionHandleTextPost(text));
+//     },
+//   }
+// };
+
+// export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
 
