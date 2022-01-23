@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Users.module.css";
 import ava from './../../img/ava.jpg';
 import { NavLink } from "react-router-dom";
+import * as axios from "axios";
 
 export let Users = (props) => {
 
@@ -22,7 +23,7 @@ export let Users = (props) => {
       return (
         <div key={u.id}>
           <span>
-            <NavLink to={'/profile/'+ u.id}>
+            <NavLink to={'/profile/' + u.id}>
               <div>
                 <img src={u.photos.small != null ? u.photos.small : ava} className={styles.userPhoto} />
               </div>
@@ -31,7 +32,32 @@ export let Users = (props) => {
               {u.name}
             </div>
             <div>
-              {u.followed ? <button onClick={() => { props.unfollow(u.id) }}>unfollow</button> : <button onClick={() => { props.follow(u.id) }}>follow</button>}
+              {u.followed ?
+                <button onClick={() => {
+                  axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                    withCredentials: true,
+                    headers: {
+                      "API-KEY": '15aee2ab-2811-4194-9d22-fd4b67f44b29',
+                    },
+                  }).then(response => {
+                    if (response.data.resultCode === 0) {
+                      props.unfollow(u.id);
+                    }
+                  })
+                }}>unfollow</button> :
+                <button onClick={() => {
+                  axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                    withCredentials: true,
+                    headers: {
+                      "API-KEY": '15aee2ab-2811-4194-9d22-fd4b67f44b29',
+                    },
+                  }).then(response => {
+                    if (response.data.resultCode === 0) {
+                      props.follow(u.id);
+                    }
+                  })
+                }}>follow</button>
+              }
             </div>
           </span>
         </div>)
