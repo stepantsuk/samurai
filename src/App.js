@@ -1,5 +1,5 @@
 import './App.css';
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/User/ProfileContainer';
 import Dialogs from './components/Dialogs/Dialogs';
@@ -17,7 +17,7 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
-        <Header />
+        <HeaderContainer />
         <Navbar /*friendsData={props.state.sideBarFriends}*//>
         <div className='app-wrapper-container'>
           <Route path='/profile/:userId?' render={ () => <ProfileContainer />} />
