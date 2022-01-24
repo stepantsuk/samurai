@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
   users: [],
@@ -11,6 +12,7 @@ let initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: true,
+  followersInProgress: [],
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -41,8 +43,16 @@ export const usersReducer = (state = initialState, action) => {
       return { ...state, currentPage: action.currentPage }
     case SET_TOTAL_USERS_COUNT:
       return { ...state, totalUsersCount: action.totalUsersCount }
-    case TOGGLE_IS_FETCHING: 
+    case TOGGLE_IS_FETCHING:
       return { ...state, isFetching: action.isFetching }
+    case TOGGLE_IS_FOLLOWING_PROGRESS:
+      return {
+        ...state,
+        followersInProgress: action.followingInProgress ?
+          [...state.followersInProgress, action.userId]
+          :
+          state.followersInProgress.filter(id => id != action.userId),
+      }
     default:
       return state;
   }
@@ -53,7 +63,8 @@ export let unfollow = (userId) => ({ type: UNFOLLOW, userId });
 export let setUsers = (users) => ({ type: SET_USERS, users });
 export let setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
 export let setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
-export let toggleIsFetching= (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export let toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export let toggleFollowingProgress = (followingInProgress, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress, userId });
 
 /* верни в users все ниже для локально стейта если что
 { id: 1, photoURL:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNgkUANhU439c2rqDbXSLDCivKS4yP52_STw&usqp=CAU', followed: true, firstName: 'Ivan', lastName: 'Ivanov', status: 'i am student', location: { city: 'Moscow', country: 'Russia' }, },
