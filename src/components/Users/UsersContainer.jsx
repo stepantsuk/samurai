@@ -4,7 +4,7 @@ import * as axios from "axios";
 import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching } from "../../redux/usersReducer";
 import { Users } from "./Users";
 import { Preloader } from './../Common/Preloader';
-import {getUsers} from './../../api/api';
+import {userAPI} from './../../api/api';
 //import preloader from './../../img/preloader.gif';
 
 
@@ -12,7 +12,7 @@ class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.toggleIsFetching(true);
     
-    getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+    userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
       this.props.toggleIsFetching(false);
       this.props.setUsers(data.items);
       this.props.setTotalUsersCount(data.totalCount);
@@ -22,7 +22,7 @@ class UsersContainer extends React.Component {
   onPageChanged = (pageNumber) => {
     this.props.toggleIsFetching(true);
     this.props.setCurrentPage(pageNumber);
-    getUsers(pageNumber, this.props.pageSize).then(data => {
+    userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
       this.props.toggleIsFetching(false);
       this.props.setUsers(data.items);
     });
