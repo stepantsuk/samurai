@@ -1,5 +1,5 @@
 import * as axios from "axios";
-// import { follow, unfollow } from './../redux/usersReducer';
+ import { follow, unfollow } from './../redux/usersReducer';
 
 
 const instance = axios.create({
@@ -17,7 +17,7 @@ export const getUsers = (currentPage, pageSize) => {
 };
 
 
-/*
+
 export const unFollowUser = (id) => {
   return instance.delete(`follow/${id}`).then(response => {
     if (response.data.resultCode === 0) {
@@ -26,6 +26,8 @@ export const unFollowUser = (id) => {
   })
 };
 
+
+
 export const followUser = (id) => {
   return instance.post(`follow/${id}`,{},).then(response => {
     if (response.data.resultCode === 0) {
@@ -33,6 +35,6 @@ export const followUser = (id) => {
     }
   })
 };
-*/
+
 
 
