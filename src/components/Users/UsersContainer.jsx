@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as axios from "axios";
-import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress } from "../../redux/usersReducer";
+import { follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers } from "../../redux/usersReducer";
 import { Users } from "./Users";
 import { Preloader } from './../Common/Preloader';
 import {userAPI} from './../../api/api';
@@ -10,22 +10,12 @@ import {userAPI} from './../../api/api';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    
-    userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-      this.props.setTotalUsersCount(data.totalCount);
-    });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   };
 
   onPageChanged = (pageNumber) => {
-    this.props.toggleIsFetching(true);
     this.props.setCurrentPage(pageNumber);
-    userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-    });
+    this.props.getUsers(pageNumber, this.props.pageSize);
   };
 
   //{this.props.isFetching ? <img src="preloader"/> : null }
@@ -58,7 +48,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress})(UsersContainer);
+export default connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers})(UsersContainer);
 
 
 /*

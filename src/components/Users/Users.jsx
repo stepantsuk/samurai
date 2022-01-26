@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Users.module.css";
 import ava from './../../img/ava.jpg';
 import { NavLink } from "react-router-dom";
+import {userAPI} from './../../api/api';
 import * as axios from "axios";
 
 export let Users = (props) => {
@@ -9,14 +10,14 @@ export let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
   let pages = [];
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 15; i++) {
     pages.push(i);
   }
 
   return <div>
     <div>
       {pages.map(p => {
-        return <div onClick={(e) => { props.onPageChanged(p) }} className={props.currentPage === p && styles.selectedPage}>{p}</div>
+        return <span onClick={(e) => { props.onPageChanged(p) }} className={props.currentPage === p && styles.selectedPage}>{p}</span>
       })}
     </div>
     {props.users.map(u => {
@@ -35,12 +36,7 @@ export let Users = (props) => {
               {u.followed ?
                 <button disabled={props.followersInProgress.some(id => id === u.id)} onClick={() => {
                   props.toggleFollowingProgress(true, u.id);
-                  axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                    withCredentials: true,
-                    headers: {
-                      "API-KEY": '15aee2ab-2811-4194-9d22-fd4b67f44b29',
-                    },
-                  }).then(response => {
+                  userAPI.unfollowUser(u.id).then(response => {
                     if (response.data.resultCode === 0) {
                       props.unfollow(u.id);
                     };
@@ -50,12 +46,7 @@ export let Users = (props) => {
                 :
                 <button disabled={props.followersInProgress.some(id => id === u.id)} onClick={() => {
                   props.toggleFollowingProgress(true, u.id);
-                  axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                    withCredentials: true,
-                    headers: {
-                      "API-KEY": '15aee2ab-2811-4194-9d22-fd4b67f44b29',
-                    },
-                  }).then(response => {
+                  userAPI.followUser(u.id).then(response => {
                     if (response.data.resultCode === 0) {
                       props.follow(u.id);
                     };
