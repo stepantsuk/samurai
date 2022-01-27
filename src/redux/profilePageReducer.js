@@ -1,3 +1,5 @@
+import {userAPI} from './../api/api';
+
 let ADD_POST = "ADD_POST";
 let HANDLE_TEXT_POST = "HANDLE_TEXT_POST";
 let SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -72,6 +74,14 @@ export const setUserProfile = (profile) => {
     profile: profile,
   }
 }
+
+export const setProfile = (userId) => {
+  return (dispatch) => {
+    userAPI.getUserProfile(userId).then(response => {
+      dispatch(setUserProfile(response.data));
+    })
+  }
+};
 
 
 /* if (action.type === 'ADD-POST') {

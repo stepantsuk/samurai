@@ -1,9 +1,10 @@
 import React from 'react';
 import Profile from './Profile';
-import { createActionAddPost, createActionHandleTextPost, setUserProfile } from './../../../redux/profilePageReducer'
+import { createActionAddPost, createActionHandleTextPost, setProfile } from './../../../redux/profilePageReducer'
 import { connect } from 'react-redux';
 import * as axios from "axios";
 import { withRouter } from 'react-router-dom';
+import {userAPI} from './../../../api/api';
 // import { wallData } from './../Post/wallData'
 
 
@@ -39,9 +40,7 @@ class ProfileContainer extends React.Component {
     if (!userId) {
       userId =2;
     };
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId).then(response => {
-      this.props.setUserProfile(response.data);
-    })
+    this.props.setProfile(userId);
   };
 
   render() {
@@ -59,7 +58,7 @@ const mapStateToProps = (state) => {
 
 let WithUrlDataContainerComponent= withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, setUserProfile })(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, setProfile })(WithUrlDataContainerComponent);
 
 
 // const mapDispatchToProps = (dispatch) => {

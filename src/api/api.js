@@ -25,6 +25,9 @@ export const userAPI = {
   authme() {
     return instance.get(`auth/me`)
   },
+  getUserProfile(userId) {
+    return instance.get(`profile/`+userId)
+  },
 };
 
 
