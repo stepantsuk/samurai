@@ -60,8 +60,8 @@ export const usersReducer = (state = initialState, action) => {
   }
 };
 
-export let follow = (userId) => ({ type: FOLLOW, userId });
-export let unfollow = (userId) => ({ type: UNFOLLOW, userId });
+export let followSuccess = (userId) => ({ type: FOLLOW, userId });
+export let unfollowSuccess = (userId) => ({ type: UNFOLLOW, userId });
 export let setUsers = (users) => ({ type: SET_USERS, users });
 export let setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
 export let setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
@@ -79,7 +79,29 @@ export const getUsers = (currentPage, pageSize) => {
   }
 };
 
+export const follow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgress(true,userId));
+    userAPI.followUser(userId).then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(followSuccess(userId));
+      };
+      dispatch(toggleFollowingProgress(false, userId));
+    } );
+  }
+};
 
+export const unfollow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgress(true,userId));
+    userAPI.unfollowUser(userId).then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(unfollowSuccess(userId));
+      };
+      dispatch(toggleFollowingProgress(false, userId));
+    } );
+  }
+};
 
 
 /* верни в users все ниже для локально стейта если что

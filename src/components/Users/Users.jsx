@@ -35,23 +35,11 @@ export let Users = (props) => {
             <div>
               {u.followed ?
                 <button disabled={props.followersInProgress.some(id => id === u.id)} onClick={() => {
-                  props.toggleFollowingProgress(true, u.id);
-                  userAPI.unfollowUser(u.id).then(response => {
-                    if (response.data.resultCode === 0) {
-                      props.unfollow(u.id);
-                    };
-                    props.toggleFollowingProgress(false, u.id);
-                  })
+                  props.unfollow(u.id)
                 }}>unfollow</button>
                 :
                 <button disabled={props.followersInProgress.some(id => id === u.id)} onClick={() => {
-                  props.toggleFollowingProgress(true, u.id);
-                  userAPI.followUser(u.id).then(response => {
-                    if (response.data.resultCode === 0) {
-                      props.follow(u.id);
-                    };
-                    props.toggleFollowingProgress(false, u.id);
-                  })
+                  props.follow(u.id)
                 }}>follow</button>
               }
             </div>

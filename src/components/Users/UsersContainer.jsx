@@ -18,8 +18,6 @@ class UsersContainer extends React.Component {
     this.props.getUsers(pageNumber, this.props.pageSize);
   };
 
-  //{this.props.isFetching ? <img src="preloader"/> : null }
-
   render() {
     return <>
       {this.props.isFetching ? <Preloader /> : null}
@@ -31,7 +29,6 @@ class UsersContainer extends React.Component {
         users={this.props.users}
         follow={this.props.follow}
         unfollow={this.props.unfollow}
-        toggleFollowingProgress={this.props.toggleFollowingProgress}
         followersInProgress={this.props.followersInProgress} />
     </>
   };
