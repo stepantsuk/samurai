@@ -1,6 +1,7 @@
 import React from 'react';
 import { Preloader } from '../../Common/Preloader';
 import user from './User.module.css';
+import ava from './../../../img/ava.jpg';
 
 const User = (props) => {
   if (!props.profile) {
@@ -8,7 +9,7 @@ const User = (props) => {
   }
   return (
     <div className={user.user}>
-      <img src={props.profile.photos.small} />
+      <img src={props.profile.photos.small = null ? props.profile.photos.small : ava } />
       <div> my name is {props.profile.fullName}</div>
       <div>
         {props.profile.lookingForAJob ? <div>i am looking for a job at the moment</div> : <div>i am not looking for a job at the moment</div>}
