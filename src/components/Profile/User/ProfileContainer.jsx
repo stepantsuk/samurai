@@ -6,6 +6,7 @@ import * as axios from "axios";
 import { withRouter } from 'react-router-dom';
 import {withAuthRedirect} from './../../../hoc/withAuthRedirect';
 import { userAPI } from './../../../api/api';
+import { compose } from 'redux';
 
 
 class ProfileContainer extends React.Component {
@@ -31,9 +32,10 @@ const mapStateToProps = (state) => {
   }
 };
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
+// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 
-export default connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, getUserProfile })(WithUrlDataContainerComponent);
+// export default connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, getUserProfile })(WithUrlDataContainerComponent);
 
+export default compose(connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, getUserProfile }),withRouter,withAuthRedirect)(ProfileContainer);
