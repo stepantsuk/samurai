@@ -3,7 +3,8 @@ import Profile from './Profile';
 import { createActionAddPost, createActionHandleTextPost, getUserProfile } from './../../../redux/profilePageReducer'
 import { connect } from 'react-redux';
 import * as axios from "axios";
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import {withAuthRedirect} from './../../../hoc/withAuthRedirect';
 import { userAPI } from './../../../api/api';
 
 
@@ -11,21 +12,17 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
     if (!userId) {
-      userId = 2;
+      userId = 21455;
     };
     this.props.getUserProfile(userId);
   };
 
   render() {
-
-    if (!this.props.isAuth) return <Redirect to={'/login'} />;
-
-
     return (
       <Profile {...this.props} />
     )
   }
-}
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -34,7 +31,9 @@ const mapStateToProps = (state) => {
   }
 };
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 
 export default connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, getUserProfile })(WithUrlDataContainerComponent);
 

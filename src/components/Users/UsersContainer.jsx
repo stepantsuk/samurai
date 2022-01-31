@@ -4,6 +4,7 @@ import * as axios from "axios";
 import { follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers } from "../../redux/usersReducer";
 import { Users } from "./Users";
 import { Preloader } from './../Common/Preloader';
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {userAPI} from './../../api/api';
 //import preloader from './../../img/preloader.gif';
 
@@ -45,7 +46,9 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers})(UsersContainer);
+
+
+export default withAuthRedirect(connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers})(UsersContainer));
 
 
 /*
