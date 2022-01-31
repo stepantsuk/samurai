@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 const Dialogs = (props) => {
@@ -65,6 +66,8 @@ const Dialogs = (props) => {
 
 
   //тренировка по React.createRef() FINISH
+
+  if (!props.isAuth) return <Redirect to ={'/login'}/>
 
   return (
     <div className={css.dialogsWrapper}>

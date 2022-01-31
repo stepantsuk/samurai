@@ -11,6 +11,7 @@ import { Friends } from './components/Friends/Friends';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { Users } from './components/Users/Users';
 import UsersContainer from './components/Users/UsersContainer';
+import { Login } from './components/Login/Login';
 
 
 const App = (props) => {
@@ -27,6 +28,7 @@ const App = (props) => {
           <Route path='/music' render={ () => <Music />} />
           <Route path='/settings' render={ () => <Settings />} />
           <Route path='/friends' render={ () => <Friends />} />
+          <Route path='/login' render={ () => <Login />} />
         </div>
       </div>
     </BrowserRouter>
