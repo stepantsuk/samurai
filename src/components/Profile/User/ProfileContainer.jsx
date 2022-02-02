@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
-import { createActionAddPost, createActionHandleTextPost, getUserProfile } from './../../../redux/profilePageReducer'
+import { createActionAddPost, createActionHandleTextPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus } from './../../../redux/profilePageReducer'
 import { connect } from 'react-redux';
 import * as axios from "axios";
 import { withRouter } from 'react-router-dom';
@@ -16,11 +16,12 @@ class ProfileContainer extends React.Component {
       userId = 21455;
     };
     this.props.getUserProfile(userId);
+    this.props.getUserProfileStatus(userId);
   };
 
   render() {
     return (
-      <Profile {...this.props} />
+      <Profile {...this.props} /*updateUserProfileStatus = {this.props.updateUserProfileStatus}*//>
     )
   }
 };
@@ -38,4 +39,4 @@ const mapStateToProps = (state) => {
 
 // export default connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, getUserProfile })(WithUrlDataContainerComponent);
 
-export default compose(connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, getUserProfile }),withRouter,withAuthRedirect)(ProfileContainer);
+export default compose(connect(mapStateToProps, { createActionAddPost, createActionHandleTextPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus }),withRouter,withAuthRedirect)(ProfileContainer);

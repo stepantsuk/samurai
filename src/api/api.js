@@ -22,11 +22,21 @@ export const userAPI = {
   unfollowUser(id) {
     return instance.delete(`follow/${id}`)
   },
+  getProfile(userId) {
+    console.warn('u use an old method , u`d get profileAPI.getProfile')
+    return profileAPI.getProfile(userId);
+  },
 };
 
 export const profileAPI = {
   getProfile(userId) {
     return instance.get(`profile/`+userId)
+  },
+  getUserProfileStatus(userId) {
+    return instance.get(`profile/status/`+ userId)
+  },
+  updateUserProfileStatus(status) {
+    return instance.put(`profile/status`, {status: status});
   },
 };
 
