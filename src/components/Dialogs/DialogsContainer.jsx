@@ -8,7 +8,7 @@ import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
   return {
-    dialogsData: state.dialogsPage,
+    dialogsPage: state.dialogsPage,
   }
 };
 

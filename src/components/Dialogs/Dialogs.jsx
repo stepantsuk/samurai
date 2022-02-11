@@ -2,9 +2,10 @@ import React from 'react';
 import css from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
-
+import { MessageFormFormik } from './MessageFormFormik';
 
 const Dialogs = (props) => {
+
   const CompanionItem = (props) => {
     let path = '/dialogs/' + props.id;
     return (
@@ -18,7 +19,7 @@ const Dialogs = (props) => {
     )
   };
 
-  let companionData = props.dialogsData.companionData;
+  let companionData = props.dialogsPage.companionData;
 
   /*let companionData = [
     { id: 1, name: 'Petr' },
@@ -32,7 +33,7 @@ const Dialogs = (props) => {
     }
   )
 
-  let messageData = props.dialogsData.messageData;
+  let messageData = props.dialogsPage.messageData;
 
   /*let messageData = [
     { id: 1, message: 'Hello' },
@@ -67,7 +68,9 @@ const Dialogs = (props) => {
 
   //тренировка по React.createRef() FINISH
 
-  if (!props.isAuth) return <Redirect to ={'/login'}/>
+  
+
+  if (!props.isAuth) return <Redirect to={'/login'} />
 
   return (
     <div className={css.dialogsWrapper}>
@@ -76,17 +79,7 @@ const Dialogs = (props) => {
       </div>
       <div>
         {messagesElements}
-        <div className={css.msgContainer}>
-          <div>
-            <textarea value={props.dialogsData.newMessageText} ref={newMsgRef} onChange={inputMsgText} placeholder="Write msg" className={css.msgText}>
-            </textarea>
-          </div>
-          <div>
-            <button onClick={publishMsgText} className={css.msgSendBtn}>
-              SendMsg
-            </button>
-          </div>
-        </div>
+        <MessageFormFormik dialogsPage={props.dialogsPage} inputMsgText={props.inputMsgText} publishMsgText={props.publishMsgText}/>
       </div>
     </div>
   )
