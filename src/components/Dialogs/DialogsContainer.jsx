@@ -14,8 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    publishMsgText: () => {
-      dispatch(createActionAddMsg());
+    publishMsgText: (text) => {
+      dispatch(createActionAddMsg(text));
     },
     inputMsgText: (text) => {
       dispatch(createActionHandleTextMsg(text));

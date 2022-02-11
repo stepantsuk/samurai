@@ -8,8 +8,9 @@ export const MessageFormFormik = (props) => {
     message: '',
   };
 
-  let onSubmit = (values) => {
-    console.log(values)
+  let onSubmit = (values, onSubmitProps) => {
+    props.publishMsgText(values.message);
+    onSubmitProps.resetForm();
   };
 
   // let publishMsgText = () => {

@@ -15,9 +15,8 @@ let initialState = {
 export const dialogsPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD-MESSAGE': {
-      let messageBody = { id: 4, message: state.newMessageText };
+      let messageBody = { id: 4, message: action.text };
       state.messageData = [...state.messageData, messageBody];
-      state.newMessageText = '';
       return { ...state };
     }
     case 'HANDLE-TEXT-MESSAGE': {
@@ -29,9 +28,10 @@ export const dialogsPageReducer = (state = initialState, action) => {
     default: return state;
   };
 };
-export const createActionAddMsg = () => {
+export const createActionAddMsg = (text) => {
   return {
-    type: 'ADD-MESSAGE'
+    type: 'ADD-MESSAGE',
+    text: text,
   }
 };
 
