@@ -1,6 +1,6 @@
 import React from 'react';
 import css from './Dialogs.module.css';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form, } from 'formik';
 
 export const MessageFormFormik = (props) => {
 

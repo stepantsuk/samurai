@@ -1,7 +1,6 @@
 import { userAPI, profileAPI } from './../api/api';
 
 let ADD_POST = "ADD_POST";
-let HANDLE_TEXT_POST = "HANDLE_TEXT_POST";
 let SET_USER_PROFILE = "SET_USER_PROFILE";
 let SET_USER_STATUS_PROFILE = "SET_USER_STATUS_PROFILE";
 
@@ -11,7 +10,6 @@ let initialState = {
     { id: 2, message: 'What are you doing ?', likesCount: 7 },
     { id: 3, message: 'All is good', likesCount: 5 },
   ],
-  newPostText: '',
   profile: null,
   status: 'hi',
 };
@@ -20,21 +18,10 @@ export const profilePageReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case ADD_POST: {
-      let newPost = { id: 4, message: state.newPostText, likesCount: 99 };
+      let newPost = { id: 4, message: action.newPostText, likesCount: 99 };
       state.wallData = [...state.wallData, newPost];
-      state.newPostText = '';
       return { ...state };
     }
-    // _addPost();
-    // return stateCopy;
-    case HANDLE_TEXT_POST: {
-      return {
-        ...state,
-        newPostText: action.newPostText
-      }
-    }
-    // _handleTextPost(action.postText);
-    // return stateCopy;
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile, }
     }
@@ -46,15 +33,9 @@ export const profilePageReducer = (state = initialState, action) => {
   };
 };
 
-export const createActionAddPost = () => {
+export const createActionAddPost = (newPostText) => {
   return {
-    type: ADD_POST
-  }
-};
-
-export const createActionHandleTextPost = (newPostText) => {
-  return {
-    type: HANDLE_TEXT_POST,
+    type: ADD_POST,
     newPostText: newPostText,
   }
 };
@@ -98,13 +79,3 @@ export const updateUserProfileStatus = (status) => {
     })
   }
 };
-
-
-/* if (action.type === 'ADD-POST') {
-  _addPost();
-} else if (action.type === 'HANDLE-TEXT-POST') {
-  _handleTextPost(action.postText);
-};
-
-return state;
-};*/

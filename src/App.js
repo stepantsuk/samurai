@@ -11,7 +11,7 @@ import { Friends } from './components/Friends/Friends';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { Users } from './components/Users/Users';
 import UsersContainer from './components/Users/UsersContainer';
-import { LoginForm } from './components/Login/Login';
+import { LoginForm } from './components/Login/LoginFormControl';
 
 
 const App = (props) => {

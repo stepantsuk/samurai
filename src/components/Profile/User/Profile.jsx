@@ -10,7 +10,7 @@ const Profile = (props) => {
     <main className={css.wrapper}>
       {/* <ProfilePict /> */}
       <ProfileInfo profile={props.profileState.profile} status={props.profileState.status} updateUserProfileStatus={props.updateUserProfileStatus} />
-      <Post posts={props.profileState.wallData} addBtn={props.createActionAddPost} textPost={props.createActionHandleTextPost} newPostText={props.profileState.newPostText}/*posts={ wallData }*/ />
+      <Post posts={props.profileState.wallData} addBtn={props.createActionAddPost} />
     </main>
   )
 }

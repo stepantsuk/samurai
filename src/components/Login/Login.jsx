@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import s from './LoginForm.module.css';
 
 let initialValues = {
   email: '',
@@ -13,17 +14,28 @@ let validationSchema = yup.object({
   password: yup.string().required('required')
 });
 
-let onSubmit = (values) => { 
+let validate = (values) => {
+  let errors = {};
+  if (!values.email) { errors.email = 'required' }
+  else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) { errors.email = 'invalid form' };
+  if (!values.password) { errors.password = 'required' }
+  else if (values.password.length <= 1) { errors.password = 'more than 1 symbol' };
+  return errors;
+}
+
+let onSubmit = (values) => {
   debugger
-  console.log(values) };
+  console.log(values)
+};
 
 let LoginFormik = () => {
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
+      //validate={validate}
       onSubmit={onSubmit}>
-      <Form>
+      <Form >
         <div>
           <div>
             <label htmlFor='email' >
@@ -38,7 +50,9 @@ let LoginFormik = () => {
           />
           <ErrorMessage
             name='email'
-          />
+            className={s.error}
+            component={'span'}>
+          </ErrorMessage>
         </div>
         <div>
           <div>
@@ -54,6 +68,8 @@ let LoginFormik = () => {
           />
           <ErrorMessage
             name='password'
+            className={s.error}
+            component={'span'}
           />
         </div>
         <div>
@@ -81,3 +97,4 @@ export const LoginForm = (props) => {
     </div>
   )
 };
+

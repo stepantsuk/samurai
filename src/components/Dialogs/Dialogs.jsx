@@ -2,7 +2,7 @@ import React from 'react';
 import css from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
-import { MessageFormFormik } from './MessageFormFormik';
+import { MessageFormControl } from './MessageFormControl';
 
 const Dialogs = (props) => {
 
@@ -79,7 +79,7 @@ const Dialogs = (props) => {
       </div>
       <div>
         {messagesElements}
-        <MessageFormFormik dialogsPage={props.dialogsPage} inputMsgText={props.inputMsgText} publishMsgText={props.publishMsgText}/>
+        <MessageFormControl publishMsgText={props.publishMsgText}/>
       </div>
     </div>
   )
