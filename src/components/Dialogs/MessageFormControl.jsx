@@ -24,6 +24,7 @@ export const MessageFormControl = (props) => {
       onSubmit={onSubmit}
     >
       {(formik) => {
+        console.log(formik)
         return (<div>
           <Form className={css.msgContainer}>
             <FormControl
