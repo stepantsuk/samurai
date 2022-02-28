@@ -2,7 +2,7 @@ import React from 'react';
 import { Preloader } from '../../Common/Preloader';
 import user from './ProfileInfo.module.css';
 import ava from './../../../img/ava.jpg';
-import { ProfileStatus } from './ProfileStatus';
+import { ProfileStatusHook } from './ProfileStatusHook';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -11,7 +11,7 @@ const ProfileInfo = (props) => {
   return (
     <div className={user.user}>
       <img src={props.profile.photos.small != null ? props.profile.photos.small : ava } />
-      <ProfileStatus status={props.status} updateUserProfileStatus={props.updateUserProfileStatus}/>
+      <ProfileStatusHook status={props.status} updateUserProfileStatus={props.updateUserProfileStatus}/>
       <div> my name is {props.profile.fullName}</div>
       <div>
         {props.profile.lookingForAJob ? <div>i am looking for a job at the moment</div> : <div>i am not looking for a job at the moment</div>}
