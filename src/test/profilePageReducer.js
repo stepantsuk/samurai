@@ -1,4 +1,4 @@
-import { userAPI, profileAPI } from './../api/api';
+//import { userAPI, profileAPI } from './../api/api';
 
 let ADD_POST = "ADD_POST";
 let SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -14,7 +14,7 @@ let initialState = {
   status: 'hi',
 };
 
-export const profilePageReducer = (state = initialState, action) => {
+const profilePageReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case ADD_POST: {
@@ -40,21 +40,21 @@ export const createActionAddPost = (newPostText) => {
   }
 };
 
-export const setUserProfile = (profile) => {
+const setUserProfile = (profile) => {
   return {
     type: SET_USER_PROFILE,
     profile: profile,
   }
 };
 
-export const setUserProfileStatus = (status) => {
+const setUserProfileStatus = (status) => {
   return {
     type: SET_USER_STATUS_PROFILE,
     status: status,
   }
 }
 
-export const getUserProfile = (userId) => {
+const getUserProfile = (userId) => {
   return (dispatch) => {
     userAPI.getProfile(userId).then(response => {
       dispatch(setUserProfile(response.data));
@@ -62,7 +62,7 @@ export const getUserProfile = (userId) => {
   }
 };
 
-export const getUserProfileStatus = (userId) => {
+const getUserProfileStatus = (userId) => {
   return (dispatch) => {
     profileAPI.getUserProfileStatus(userId).then(response => {
       dispatch(setUserProfileStatus(response.data));
@@ -70,7 +70,7 @@ export const getUserProfileStatus = (userId) => {
   }
 };
 
-export const updateUserProfileStatus = (status) => {
+const updateUserProfileStatus = (status) => {
   return (dispatch) => {
     profileAPI.updateUserProfileStatus(status).then(response => {
       if (response.data.resultCode === 0) {
@@ -81,4 +81,4 @@ export const updateUserProfileStatus = (status) => {
 };
 
 
-//module.exports = profilePageReducer, createActionAddPost;
+module.exports = profilePageReducer;
