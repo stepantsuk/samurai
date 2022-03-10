@@ -1,5 +1,5 @@
-import { updateObjectInArray } from '../test/utils/objectHelpers';
 import { userAPI } from './../api/api';
+import { updateObjectInArray } from '../components/utils/objectHelpers';
 
 
 const FOLLOW = "FOLLOW";
