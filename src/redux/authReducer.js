@@ -1,6 +1,6 @@
 import { authAPI } from './../api/api';
 
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "samurai/auth/SET_USER_DATA";
 
 let initialState = {
   userId: null,
@@ -21,15 +21,13 @@ export const authReducer = (state = initialState, action) => {
   }
 };
 
-export const getAuthUserData = () => (dispatch) => {
-  return authAPI.me()
-      .then(response => {
-          if (response.data.resultCode === 0) {
-              let {id, email, login} = response.data.data;
-              dispatch(setAuthUserData(id, email, login, true));
-          }
-      });
-}
+export const getAuthUserData = () => async (dispatch) => {
+  let response = await authAPI.me();
+    if (response.data.resultCode === 0) {
+      let { id, email, login } = response.data.data;
+      dispatch(setAuthUserData(id, email, login, true));
+    };
+};
 
 export let setAuthUserData = (userId, email, login, isAuth) => {
   return ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } })
@@ -43,7 +41,7 @@ export const login = (email, password, rememberMe, setStatus, setSubmitting) => 
       } else { setStatus(response.data.messages) };
       setSubmitting(false);
     });
-    
+
   }
 };
 

@@ -1,3 +1,6 @@
+let ADD_MESSAGE = 'samurai/dialogs/ADD_MESSAGE';
+let HANDLE_TEXT_MESSAGE = 'samurai/dialogs/HANDLE_TEXT_MESSAGE';
+
 let initialState = {
   companionData: [
     { id: 1, name: 'Petr' },
@@ -14,12 +17,12 @@ let initialState = {
 
 export const dialogsPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD-MESSAGE': {
+    case ADD_MESSAGE: {
       let messageBody = { id: 4, message: action.text };
       state.messageData = [...state.messageData, messageBody];
       return { ...state };
     }
-    case 'HANDLE-TEXT-MESSAGE': {
+    case HANDLE_TEXT_MESSAGE: {
       return {
         ...state,
         newMessageText: action.messageText
@@ -30,7 +33,7 @@ export const dialogsPageReducer = (state = initialState, action) => {
 };
 export const createActionAddMsg = (text) => {
   return {
-    type: 'ADD-MESSAGE',
+    type: ADD_MESSAGE,
     text: text,
   }
 };
@@ -38,7 +41,7 @@ export const createActionAddMsg = (text) => {
 
 export const createActionHandleTextMsg = (text) => {
   return {
-    type: 'HANDLE-TEXT-MESSAGE',
+    type: HANDLE_TEXT_MESSAGE,
     messageText: text,
   }
 };

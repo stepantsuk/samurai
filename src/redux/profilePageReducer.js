@@ -1,8 +1,8 @@
 import { userAPI, profileAPI } from './../api/api';
 
-let ADD_POST = "ADD_POST";
-let SET_USER_PROFILE = "SET_USER_PROFILE";
-let SET_USER_STATUS_PROFILE = "SET_USER_STATUS_PROFILE";
+let ADD_POST = "samurai/profile/ADD_POST";
+let SET_USER_PROFILE = "samurai/profile/SET_USER_PROFILE";
+let SET_USER_STATUS_PROFILE = "samurai/profile/SET_USER_STATUS_PROFILE";
 
 let initialState = {
   wallData: [
@@ -11,7 +11,7 @@ let initialState = {
     { id: 3, message: 'All is good', likesCount: 5 },
   ],
   profile: null,
-  status: 'hi',
+  status: '',
 };
 
 export const profilePageReducer = (state = initialState, action) => {
@@ -54,31 +54,22 @@ export const setUserProfileStatus = (status) => {
   }
 }
 
-export const getUserProfile = (userId) => {
-  return (dispatch) => {
-    userAPI.getProfile(userId).then(response => {
-      dispatch(setUserProfile(response.data));
-    })
-  }
+export const getUserProfile = (userId) => async (dispatch) => {
+  const response = await userAPI.getProfile(userId);
+  dispatch(setUserProfile(response.data))
 };
 
 export const getUserProfileStatus = (userId) => {
-  return (dispatch) => {
-    profileAPI.getUserProfileStatus(userId).then(response => {
-      dispatch(setUserProfileStatus(response.data));
-    })
+  return async (dispatch) => {
+    const response = await profileAPI.getUserProfileStatus(userId);
+    dispatch(setUserProfileStatus(response.data));
   }
 };
 
-export const updateUserProfileStatus = (status) => {
-  return (dispatch) => {
-    profileAPI.updateUserProfileStatus(status).then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(setUserProfileStatus(status))
-      };
-    })
-  }
+export const updateUserProfileStatus = (status) => async (dispatch) => {
+    const response = await profileAPI.updateUserProfileStatus(status);
+    if (response.data.resultCode === 0) {
+      dispatch(setUserProfileStatus(status))
+    };
 };
 
-
-//module.exports = profilePageReducer, createActionAddPost;

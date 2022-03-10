@@ -3,18 +3,15 @@ import { React, Component } from 'react';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/User/ProfileContainer';
-import Dialogs from './components/Dialogs/Dialogs';
 import { Route } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Friends } from './components/Friends/Friends';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
-import { Users } from './components/Users/Users';
 import UsersContainer from './components/Users/UsersContainer';
 import { LoginFormContainer } from './components/Login/LoginFormControl';
 import { connect } from "react-redux";
-import { compose } from "redux";
 import { initializeApp } from './redux/appReducer';
 import { Preloader } from './components/Common/Preloader';
 
