@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfilePict from './ProfilePict'
-import User from './User';
+import ProfileInfo from './ProfileInfo';
 import Post from '../Post/Post'
 import css from './Profile.module.css';
 // import { wallData } from './../Post/wallData'
@@ -8,9 +8,9 @@ import css from './Profile.module.css';
 const Profile = (props) => {
   return (
     <main className={css.wrapper}>
-      <ProfilePict />
-      <User />
-      <Post posts= {props.postsData.wallData} dispatch={props.dispatch} newPostText={props.postsData.newPostText}/*posts={ wallData }*//>
+      {/* <ProfilePict /> */}
+      <ProfileInfo profile={props.profileState.profile} status={props.profileState.status} updateUserProfileStatus={props.updateUserProfileStatus} />
+      <Post posts={props.profileState.wallData} addBtn={props.createActionAddPost} />
     </main>
   )
 }

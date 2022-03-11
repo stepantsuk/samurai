@@ -1,54 +1,75 @@
+import { userAPI, profileAPI } from './../api/api';
+
+let ADD_POST = "samurai/profile/ADD_POST";
+let SET_USER_PROFILE = "samurai/profile/SET_USER_PROFILE";
+let SET_USER_STATUS_PROFILE = "samurai/profile/SET_USER_STATUS_PROFILE";
+
 let initialState = {
   wallData: [
     { id: 1, message: 'Hi how are you ?', likesCount: 12 },
     { id: 2, message: 'What are you doing ?', likesCount: 7 },
     { id: 3, message: 'All is good', likesCount: 5 },
   ],
-  newPostText: '',
+  profile: null,
+  status: '',
 };
 
 export const profilePageReducer = (state = initialState, action) => {
-  let _addPost = () => {
-    let newPost = { id: 4, message: state.newPostText, likesCount: 99 };
-    state.wallData.push(newPost);
-    state.newPostText = '';
-  };
-
-  let _handleTextPost = (postText) => {
-    state.newPostText = postText;
-  };
 
   switch (action.type) {
-    case 'ADD-POST':
-      _addPost();
-      return state;
-    case 'HANDLE-TEXT-POST':
-      _handleTextPost(action.postText);
-      return state;
+    case ADD_POST: {
+      let newPost = { id: 4, message: action.newPostText, likesCount: 99 };
+      state.wallData = [...state.wallData, newPost];
+      return { ...state };
+    }
+    case SET_USER_PROFILE: {
+      return { ...state, profile: action.profile, }
+    }
+    case SET_USER_STATUS_PROFILE: {
+      return { ...state, status: action.status, }
+    }
     default:
       return state;
   };
 };
 
-export const createActionAddPost = () => {
+export const createActionAddPost = (newPostText) => {
   return {
-    type: 'ADD-POST'
+    type: ADD_POST,
+    newPostText: newPostText,
   }
 };
 
-export const createActionHandleTextPost = (text) => {
+export const setUserProfile = (profile) => {
   return {
-    type: 'HANDLE-TEXT-POST',
-    postText: text,
+    type: SET_USER_PROFILE,
+    profile: profile,
   }
 };
 
+export const setUserProfileStatus = (status) => {
+  return {
+    type: SET_USER_STATUS_PROFILE,
+    status: status,
+  }
+}
 
-/* if (action.type === 'ADD-POST') {
-  _addPost();
-} else if (action.type === 'HANDLE-TEXT-POST') {
-  _handleTextPost(action.postText);
+export const getUserProfile = (userId) => async (dispatch) => {
+  const response = await userAPI.getProfile(userId);
+  dispatch(setUserProfile(response.data))
 };
 
-return state;
-};*/
+export const getUserProfileStatus = (userId) => {
+  return async (dispatch) => {
+    const response = await profileAPI.getUserProfileStatus(userId);
+    dispatch(setUserProfileStatus(response.data));
+  }
+};
+
+export const updateUserProfileStatus = (status) => async (dispatch) => {
+    const response = await profileAPI.updateUserProfileStatus(status);
+    if (response.data.resultCode === 0) {
+      dispatch(setUserProfileStatus(status))
+    };
+};
+

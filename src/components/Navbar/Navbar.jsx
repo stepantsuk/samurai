@@ -1,21 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import css from './Navbar.module.css';
+import { FriendsSideBarContainer } from './FriendsSideBar/FriendsSideBarContainer';
 
 const Navbar = (props) => {
-  const FriendsSideBarItem = (props) => {
-    return (
-      <div className={css.itemFriendsWrapper}>
-        <div className={css.avatarFriends}>
-          <img className={css.avatarFriendsImg}>
-          </img>
-        </div>
-        {props.name}
-      </div>
-    )
-  }
+  
 
-  let friendsElements = props.friendsData.friendsData.map(friend => <FriendsSideBarItem name={friend.name} />)
+  // let friendsElements = props.friendsData.friendsData.map(friend => <FriendsSideBarItem name={friend.name} />)
 
   return (
     <nav className={css.nav}>
@@ -23,6 +14,12 @@ const Navbar = (props) => {
         <NavLink to="/profile" className={css.link} activeClassName={css.activeLink
         }>
           Profile
+        </NavLink>
+      </div>
+      <div>
+        <NavLink to="/users" className={css.link} activeClassName={css.activeLink
+        }>
+          Users
         </NavLink>
       </div>
       <div>
@@ -55,7 +52,7 @@ const Navbar = (props) => {
           Friends
         </NavLink>
         <div className={css.friendsWrapper}>
-          {friendsElements}
+          <FriendsSideBarContainer />
         </div>
       </div>
     </nav>

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/redux-store'
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 /*
 let companionData = [
@@ -23,19 +25,20 @@ let wallData = [
   { id: 3, message: 'All is good', likesCount: 5 },
 ]
 */
-//учусь пользваоться гитом
 
-let rerenderEntireTree = () => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
-};
 
-rerenderEntireTree();
-store.subscribe(rerenderEntireTree);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store} >
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
 
 
 

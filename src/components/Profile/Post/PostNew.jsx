@@ -7,29 +7,29 @@ const PostNew = (props) => {
   let newPostElement = React.createRef();
 
   let onAddBtn = () => {
-    props.dispatch(createActionAddPost());
-    //props.handleTextPost('');
+    props.addBtn();
+  };
+  
+  let onTextPost = () => {
+    props.textPost(newPostElement.current.value)
   };
 
-  let textPost = () => {
-    props.dispatch(createActionHandleTextPost(newPostElement.current.value));
-  }
 
-  //props.handleTextPost(newPostElement.current.value);
+//props.handleTextPost(newPostElement.current.value);
 
-  return (
-    <div className={postNew.container}>
-      <div>
-        <textarea value={props.newPostText} onChange={textPost} ref={newPostElement} placeholder="Write smth" className={postNew.text}>
-        </textarea>
-      </div>
-      <div>
-        <button onClick={onAddBtn} className={postNew.btn}>
-          Send
-        </button>
-      </div>
+return (
+  <div className={postNew.container}>
+    <div>
+      <textarea value={props.newPostText} onChange={onTextPost} ref={newPostElement} placeholder="Write smth" className={postNew.text}>
+      </textarea>
     </div>
-  )
-}
+    <div>
+      <button onClick={onAddBtn} className={postNew.btn}>
+        Send
+      </button>
+    </div>
+  </div>
+)}
+
 
 export default PostNew

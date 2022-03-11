@@ -1,6 +1,7 @@
 import React from 'react';
 import post from './Post.module.css';
 import PostNew from './PostNew';
+import {PostFormControl} from './PostFormControl'
 import Wall from './Wall';
 //import { wallData } from './wallData'
 
@@ -24,7 +25,7 @@ const Post = (props) => {
       <h3 className={post.title}>
         MyPosts
       </h3>
-      <PostNew dispatch={props.dispatch} dispatch={props.dispatch} newPostText={props.newPostText}/>
+      <PostFormControl addBtn={props.addBtn}/>
       {wallElement}
     </div>
   )

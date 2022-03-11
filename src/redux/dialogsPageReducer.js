@@ -1,3 +1,6 @@
+let ADD_MESSAGE = 'samurai/dialogs/ADD_MESSAGE';
+let HANDLE_TEXT_MESSAGE = 'samurai/dialogs/HANDLE_TEXT_MESSAGE';
+
 let initialState = {
   companionData: [
     { id: 1, name: 'Petr' },
@@ -13,44 +16,32 @@ let initialState = {
 };
 
 export const dialogsPageReducer = (state = initialState, action) => {
-  let _addMessage = () => {
-    let messageBody = { id: 4, message: state.newMessageText };
-    state.messageData.push(messageBody);
-    state.newMessageText = '';
-  };
-
-  let _handleTextMessage = (messageValue) => {
-    state.newMessageText = messageValue;
-  };
-
   switch (action.type) {
-    case 'ADD-MESSAGE':
-      _addMessage();
-      return state;
-    case 'HANDLE-TEXT-MESSAGE':
-      _handleTextMessage(action.messageText);
-      return state;
+    case ADD_MESSAGE: {
+      let messageBody = { id: 4, message: action.text };
+      state.messageData = [...state.messageData, messageBody];
+      return { ...state };
+    }
+    case HANDLE_TEXT_MESSAGE: {
+      return {
+        ...state,
+        newMessageText: action.messageText
+      }
+    }
     default: return state;
   };
-
-  /*
-  if (action.type === 'ADD-MESSAGE') {
-    _addMessage();
-  } else if (action.type === 'HANDLE-TEXT-MESSAGE') {
-    _handleTextMessage(action.messageText);
-  };
-  */
 };
-
-export const createActionAddMsg = () => {
+export const createActionAddMsg = (text) => {
   return {
-    type: 'ADD-MESSAGE'
+    type: ADD_MESSAGE,
+    text: text,
   }
 };
 
+
 export const createActionHandleTextMsg = (text) => {
   return {
-    type: 'HANDLE-TEXT-MESSAGE',
+    type: HANDLE_TEXT_MESSAGE,
     messageText: text,
   }
 };

@@ -1,10 +1,11 @@
 import React from 'react';
 import css from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
-import { createActionHandleTextMsg, createActionAddMsg } from './../../redux/dialogsPageReducer'
-
+import { Redirect } from 'react-router-dom';
+import { MessageFormControl } from './MessageFormControl';
 
 const Dialogs = (props) => {
+
   const CompanionItem = (props) => {
     let path = '/dialogs/' + props.id;
     return (
@@ -18,7 +19,7 @@ const Dialogs = (props) => {
     )
   };
 
-  let companionData = props.dialogsData.companionData;
+  let companionData = props.dialogsPage.companionData;
 
   /*let companionData = [
     { id: 1, name: 'Petr' },
@@ -32,7 +33,7 @@ const Dialogs = (props) => {
     }
   )
 
-  let messageData = props.dialogsData.messageData;
+  let messageData = props.dialogsPage.messageData;
 
   /*let messageData = [
     { id: 1, message: 'Hello' },
@@ -57,15 +58,19 @@ const Dialogs = (props) => {
   //let showMsgText = newMsgRef.current.value;
 
   let inputMsgText = () => {
-    props.dispatch(createActionHandleTextMsg(newMsgRef.current.value))
+    props.inputMsgText(newMsgRef.current.value)
   };
 
   let publishMsgText = () => {
-    props.dispatch(createActionAddMsg())
+    props.publishMsgText()
   };
 
 
   //тренировка по React.createRef() FINISH
+
+  
+
+  if (!props.isAuth) return <Redirect to={'/login'} />
 
   return (
     <div className={css.dialogsWrapper}>
@@ -74,17 +79,7 @@ const Dialogs = (props) => {
       </div>
       <div>
         {messagesElements}
-        <div className={css.msgContainer}>
-          <div>
-            <textarea value={props.dialogsData.newMessageText} ref={newMsgRef} onChange={inputMsgText} placeholder="Write msg" className={css.msgText}>
-            </textarea>
-          </div>
-          <div>
-            <button onClick={publishMsgText} className={css.msgSendBtn}>
-              SendMsg
-            </button>
-          </div>
-        </div>
+        <MessageFormControl publishMsgText={props.publishMsgText}/>
       </div>
     </div>
   )
