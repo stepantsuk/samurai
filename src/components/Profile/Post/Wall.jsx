@@ -1,11 +1,12 @@
 import React from 'react';
 import wall from './Wall.module.css';
+import ava from './../../../img/shreder.png';
 
 const Wall = (props) => {
   return (
     <div className={wall.postContainer}>
       <div className={wall.postAvatar}>
-        <img src='http://pscd.ru/uploads/posts/2015-01/1420715573_shreder.png' className={wall.postAvatarImg}>
+        <img src={ava} className={wall.postAvatarImg}>
         </img>
       </div>
       <div className={wall.postText}>

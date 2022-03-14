@@ -1,18 +1,31 @@
 import React from 'react';
 import { Preloader } from '../../Common/Preloader';
 import user from './ProfileInfo.module.css';
-import ava from './../../../img/ava.jpg';
+import ava from './../../../img/leo.png';
 import { ProfileStatusHook } from './ProfileStatusHook';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />
   }
+
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0]);
+    };
+  };
+
+
   return (
     <div className={user.user}>
-      <img src={props.profile.photos.small != null ? props.profile.photos.small : ava } />
-      <ProfileStatusHook status={props.status} updateUserProfileStatus={props.updateUserProfileStatus}/>
-      <div> my name is {props.profile.fullName}</div>
+      <img src={props.profile.photos.large || ava} className={user.mainPhoto} />
+      <div>
+        {props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}></input>}
+      </div>
+      <ProfileStatusHook status={props.status} updateUserProfileStatus={props.updateUserProfileStatus} />
+      <div>
+        my name is {props.profile.fullName}
+      </div>
       <div>
         {props.profile.lookingForAJob ? <div>i am looking for a job at the moment</div> : <div>i am not looking for a job at the moment</div>}
       </div>

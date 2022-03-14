@@ -3,6 +3,7 @@ import { userAPI, profileAPI } from './../api/api';
 let ADD_POST = "samurai/profile/ADD_POST";
 let SET_USER_PROFILE = "samurai/profile/SET_USER_PROFILE";
 let SET_USER_STATUS_PROFILE = "samurai/profile/SET_USER_STATUS_PROFILE";
+let SAVE_PHOTO_SUCCESS = "samurai/profile/SAVE_PHOTO_SUCCESS";
 
 let initialState = {
   wallData: [
@@ -28,6 +29,9 @@ export const profilePageReducer = (state = initialState, action) => {
     case SET_USER_STATUS_PROFILE: {
       return { ...state, status: action.status, }
     }
+    case SAVE_PHOTO_SUCCESS: {
+      return { ...state, profile: { ...state.profile, photos: action.photos } }
+    }
     default:
       return state;
   };
@@ -46,6 +50,13 @@ export const setUserProfile = (profile) => {
     profile: profile,
   }
 };
+
+export const savePhotoAC = (photos) => {
+  return {
+    type: SAVE_PHOTO_SUCCESS,
+    photos: photos,
+  }
+}
 
 export const setUserProfileStatus = (status) => {
   return {
@@ -67,9 +78,16 @@ export const getUserProfileStatus = (userId) => {
 };
 
 export const updateUserProfileStatus = (status) => async (dispatch) => {
-    const response = await profileAPI.updateUserProfileStatus(status);
-    if (response.data.resultCode === 0) {
-      dispatch(setUserProfileStatus(status))
-    };
+  const response = await profileAPI.updateUserProfileStatus(status);
+  if (response.data.resultCode === 0) {
+    dispatch(setUserProfileStatus(status))
+  };
+};
+
+export const savePhoto = (file) => async (dispatch) => {
+  const response = await profileAPI.savePhoto(file);
+  if (response.data.resultCode === 0) {
+    dispatch(savePhotoAC(response.data.data.photos))
+  };
 };
 

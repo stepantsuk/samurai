@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
-import { createActionAddPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus } from './../../../redux/profilePageReducer'
+import { createActionAddPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus, savePhoto } from './../../../redux/profilePageReducer'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 //import {withAuthRedirect} from './../../../hoc/withAuthRedirect';
@@ -8,7 +8,8 @@ import { compose } from 'redux';
 
 
 class ProfileContainer extends React.Component {
-  componentDidMount() {
+
+  refreshProfile() {
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = this.props.authorizedUserId;
@@ -20,9 +21,19 @@ class ProfileContainer extends React.Component {
     this.props.getUserProfileStatus(userId);
   };
 
+  componentDidMount() {
+    this.refreshProfile()
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      this.refreshProfile()
+    };
+  };
+
   render() {
     return (
-      <Profile {...this.props} />
+      <Profile {...this.props} isOwner={!this.props.match.params.userId} />
     )
   }
 };
@@ -36,7 +47,7 @@ const mapStateToProps = (state) => {
 };
 
 export default compose(
-  connect(mapStateToProps, { createActionAddPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus }), withRouter
+  connect(mapStateToProps, { createActionAddPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus, savePhoto }), withRouter
 )(ProfileContainer);
 
   // здесь зачем то мы удалил withAuthRedirect из конейнера выше (он был после withRouter) и вставили то , что на 14й строчке кода метод this.props.history.push("/login");
