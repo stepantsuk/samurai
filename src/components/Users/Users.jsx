@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Users.module.css";
-import ava from './../../img/ava.jpg';
+import ava from './../../img/leo.png';
 import { NavLink } from "react-router-dom";
 import { Paginator } from "../Common/Paginator";
 import {userAPI} from './../../api/api';
