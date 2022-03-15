@@ -1,8 +1,9 @@
 import React from 'react';
 import { Preloader } from '../../Common/Preloader';
-import user from './ProfileInfo.module.css';
 import ava from './../../../img/leo.png';
+import user from './ProfileInfo.module.css';
 import { ProfileStatusHook } from './ProfileStatusHook';
+import { ProfileDataInfo } from './ProfileDataInfo';
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -23,13 +24,8 @@ const ProfileInfo = (props) => {
         {props.isOwner && <input type={"file"} onChange={onMainPhotoSelected}></input>}
       </div>
       <ProfileStatusHook status={props.status} updateUserProfileStatus={props.updateUserProfileStatus} />
-      <div>
-        my name is {props.profile.fullName}
-      </div>
-      <div>
-        {props.profile.lookingForAJob ? <div>i am looking for a job at the moment</div> : <div>i am not looking for a job at the moment</div>}
-      </div>
-      <div>
+      <ProfileDataInfo profile={props.profile} />
+      {/* <div>
         my socials
         <div>
           facebook: {props.profile.contacts.facebook ? props.profile.contacts.facebook : 'not'}
@@ -52,7 +48,7 @@ const ProfileInfo = (props) => {
         <div>
           mainLink: {props.profile.contacts.mainLink ? props.profile.contacts.mainLink : 'not'}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
