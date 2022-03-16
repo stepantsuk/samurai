@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
-import { createActionAddPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus, savePhoto } from './../../../redux/profilePageReducer'
+import { createActionAddPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus, savePhoto , saveProfile} from './../../../redux/profilePageReducer'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 //import {withAuthRedirect} from './../../../hoc/withAuthRedirect';
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
 };
 
 export default compose(
-  connect(mapStateToProps, { createActionAddPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus, savePhoto }), withRouter
+  connect(mapStateToProps, { createActionAddPost, getUserProfile, getUserProfileStatus, updateUserProfileStatus, savePhoto, saveProfile }), withRouter
 )(ProfileContainer);
 
   // здесь зачем то мы удалил withAuthRedirect из конейнера выше (он был после withRouter) и вставили то , что на 14й строчке кода метод this.props.history.push("/login");

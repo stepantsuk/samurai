@@ -19,7 +19,6 @@ const Post = (props) => {
         return <Wall message={post.message} likesCount={post.likesCount} />
       }
     )
-  console.log(wallElement);
   return (
     <div className={post.container}>
       <h3 className={post.title}>
