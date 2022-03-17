@@ -91,3 +91,31 @@ export const savePhoto = (file) => async (dispatch) => {
   };
 };
 
+export const saveProfile = (profile, setStatus, setSubmitting) => async (dispatch, getState) => {
+  setSubmitting(true);
+  const userId = getState().auth.userId;
+  const response = await profileAPI.saveProfile(profile);
+  setSubmitting(false);
+  if (response.data.resultCode === 0) {
+    dispatch(getUserProfile(userId));
+  } else {
+    setStatus(response.data.messages);
+    return Promise.reject();
+  };
+};
+
+//export const saveProfile = (profile) => {profileAPI.saveProfile(profile)};
+
+// export const saveProfile = (profile) => {
+//   return (dispatch) => {
+//     authAPI.saveProfile(profile).then(response => {
+//       if (response.data.resultCode === 0) {
+//         dispatch(getAuthUserData())
+//       } else { setStatus(response.data.messages) };
+//       setSubmitting(false);
+//     });
+
+//   }
+// };
+
+
